@@ -18,17 +18,55 @@ function getComputerChoice(){
 }
 var playerScore = 0;
 var computerScore = 0;
-function playGame(){
-    alert("Let's play 5 games of Paper, Scissors, Rock!");
-    playerScore = 0;
-    computerScore = 0;
-    for(let i = 0; i < 5; i++){
-        let playerChoice = prompt("Please enter Rock, Paper, or Scissors").toLowerCase();
-        alert(compareChoices(playerChoice, getComputerChoice()));
-        alert("The current score is: Player " + playerScore + ", Computer " + computerScore);
-    }
-    alert("The final score is: Player " + playerScore + ", Computer " + computerScore);
+//setup buttons
+let container = document.querySelector(".container");
+
+let rockButton = document.createElement("button");
+rockButton.classList.add("content");
+rockButton.textContent = "Rock";
+rockButton.addEventListener("click", chooseRock);
+container.appendChild(rockButton);
+
+
+let scissorsButton = document.createElement("button");
+scissorsButton.classList.add("content");
+scissorsButton.textContent = "Scissors";
+scissorsButton.addEventListener("click", chooseScissors);
+container.appendChild(scissorsButton);
+
+
+let paperButton = document.createElement("button");
+paperButton.classList.add("content");
+paperButton.textContent = "Paper";
+paperButton.addEventListener("click", choosePaper);
+container.appendChild(paperButton);
+
+let resultDiv = document.createElement("div");
+resultDiv.classList.add("content");
+container.appendChild(resultDiv);
+
+let scoreDiv = document.createElement("div");
+scoreDiv.classList.add("content");
+container.appendChild(scoreDiv);
+
+
+function playGame(choice){
+        //let playerChoice = prompt("Please enter Rock, Paper, or Scissors").toLowerCase();
+        resultDiv.textContent = compareChoices(choice, getComputerChoice());
+        scoreDiv.textContent = "Player: " + playerScore.toString() + " Computer: " + computerScore.toString();
     return;
+}
+
+function choosePaper(e){
+    playGame("paper");
+}
+
+function chooseScissors(e){
+    playGame("scissors");
+}
+
+function chooseRock(e){
+    playGame("rock");
 }
 
 function compareChoices(playerChoice, computerChoice){
